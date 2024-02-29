@@ -18,6 +18,12 @@ struct Buyer {
 		born = "dd/mm/yyyy";
 };
 
+struct Employee {
+	string name = "dd";
+	string job = "dd";
+	int salary = 90;
+};
+
 void way_1();
 void way_2();
 void way_3();
@@ -26,8 +32,6 @@ void way_5();
 void way_6();
 void way_7();
 void way_8();
-void way_9();
-void way_10();
 
 int main() {
 	int way;
@@ -43,8 +47,6 @@ int main() {
 	case 6: way_6(); break;
 	case 7: way_7(); break;
 	case 8: way_8(); break;
-	case 9: way_9(); break;
-	case 10: way_10(); break;
 
 	default: break;
 	}
@@ -237,7 +239,6 @@ void way_6() {
 void way_7() {
 	int number;
 	string str, tmp;
-	char symbol;
 	bool founded;
 	
 	vector<vector<vector<int>>> main;
@@ -344,15 +345,59 @@ void way_7() {
 
 
 void way_8() {
+	int counter = 0;
+	float sum = 0;
 
-}
+	vector<Employee> workers;
+
+	ofstream file_write("source_8.txt");
+	if (!file_write.is_open()) {
+		cout << "ERROR: can't open source_8.txt\n";
+		return;
+	}
+
+	Employee andy, george, sam, victor;
+	andy.job = "driver";
+	andy.name = "Andy";
+	andy.salary = 1000;
+	george.job = "plumber";
+	george.name = "George";
+	george.salary = 100;
+	sam.job = "director";
+	sam.name = "Sam";
+	sam.salary = 50000;
+	victor.job = "plumber";
+	victor.name = "Victor";
+	victor.salary = 200;
+
+	file_write.write((char*)&andy, sizeof(Employee));
+	file_write.write((char*)&george, sizeof(Employee));
+	file_write.write((char*)&sam, sizeof(Employee));
+	file_write.write((char*)&victor, sizeof(Employee));
+	file_write.close();
 
 
-void way_9() {
+	ifstream file_read("source_8.txt");
+	if (!file_read.is_open()) {
+		cout << "ERROR: can't read source_8.txt\n";
+		return;
+	}
 
-}
+	Employee someone;
+	while (!file_read.eof()) {
+		file_read.read((char*)&someone, sizeof(Employee));
+		workers.push_back(someone);
+	}
+	
 
-
-void way_10() {
-
+	for (int i = 0; i < workers.size() - 1; i++) {
+		someone = workers[i];
+		if (someone.job == "plumber") {
+			counter++;
+			sum += someone.salary;
+		}
+	}
+	float aver = sum / counter;
+	cout << "There is " << counter << " plumbers with average salary " << aver << endl;
+	return;
 }
