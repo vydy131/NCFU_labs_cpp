@@ -23,6 +23,28 @@ public:
 	float get_cals() { return cals_per_100*0.01*weight; }
 };
 
+class Time {
+private:
+	int second = 0;
+	int minute = 0;
+	int hour = 0;
+public:
+	Time() {}
+	Time(int sec, int min, int hou) {
+		second = sec;
+		minute = min;
+		hour = hou;
+	}
+	int get_inseconds() { return second + minute * 60 + hour * 3600; }
+	void increase() { second += 5; }
+	void change() {
+		cout << "Hours minutes seconds: ";
+		cin >> hour >> minute >> second;
+	}
+
+	~Time(){}
+};
+
 void program_1();
 void program_2();
 
@@ -38,7 +60,7 @@ int main() {
 		program_1();
 		break;
 	case 2:
-		program_2;
+		program_2();
 		break;
 
 	default:
@@ -74,5 +96,32 @@ void program_1(){
 }
 
 void program_2(){
+	string input;
+	int sec, min, hour;
 
+	cout << "Seconds: "; cin >> sec;
+	cout << "Minutes: "; cin >> min;
+	cout << "Hours: "; cin >> hour;
+	Time something(sec, min, hour);
+
+	cout << "Enter the command: ";
+	cin >> input;
+
+	while (true) {
+		if (input == "change") {
+			something.change();
+		}
+
+		if (input == "increase") {
+			something.increase();
+		}
+
+		if (input == "show") {
+			cout << "Time in seconds: " << something.get_inseconds() << endl;
+		}
+
+		if (input == "exit") { return; }
+		cout << "Enter the command: ";
+		cin >> input;
+	}
 }
