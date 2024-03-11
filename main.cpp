@@ -8,11 +8,19 @@ private:
 	float weight = 0;
 	float cals = 0;
 public:
-	void change_per_100(float number) { cals_per_100 = number; }
 	float get_per_100() { return cals_per_100; }
-	void change_weight(float number) { weight = number; }
+	void change_per_100() { 
+		cout << "Calories per 100 gramms: ";
+		cin >> cals_per_100;
+	}
+
 	float get_weight() { return weight; }
-	float get_cals() { return cals_per_100*weight; }
+	void change_weight(){
+		cout << "Weight in gramms: ";
+		cin >> weight;
+	}
+
+	float get_cals() { return cals_per_100*0.01*weight; }
 };
 
 void program_1();
@@ -21,7 +29,7 @@ void program_2();
 int main() {
 	int program;
 
-	cout << "Enter the program to run:";
+	cout << "Enter the program to run: ";
 	cin >> program;
 
 	while (true) {
@@ -36,12 +44,33 @@ int main() {
 		default:
 			cout << "ERROR: wrong input\n";
 		}
-		cout << "Enter the program to run:";
+		cout << "Enter the program to run: ";
 	}
 }
 
 void program_1(){
-	
+	string input;
+	Food something;
+	cout << "Enter the command: ";
+	cin >> input;
+
+	while (true) {
+		if (input == "new") {
+			something.change_per_100();
+			something.change_weight();
+			cout << "There is " << something.get_cals() << " calories\n";
+		}
+
+		if (input == "show") {
+			cout << "Calories per 100: " << something.get_per_100() << endl;
+			cout << "Weight: " << something.get_weight() << endl;
+			cout << "Calories: " << something.get_cals() << endl;
+		}
+
+		if (input == "exit") { return; }
+		cout << "Enter the command: ";
+		cin >> input;
+	}
 }
 
 void program_2(){
