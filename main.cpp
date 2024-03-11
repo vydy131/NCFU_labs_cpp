@@ -32,20 +32,20 @@ int main() {
 	cout << "Enter the program to run: ";
 	cin >> program;
 
-	while (true) {
-		switch (program) {
-		case 1:
-			program_1();
-			break;
-		case 2:
-			program_2;
-			break;
+	
+	switch (program) {
+	case 1:
+		program_1();
+		break;
+	case 2:
+		program_2;
+		break;
 
-		default:
-			cout << "ERROR: wrong input\n";
-		}
-		cout << "Enter the program to run: ";
+	default:
+		cout << "ERROR: wrong input\n";
 	}
+	cout << "Enter the program to run: ";
+	
 }
 
 void program_1(){
